@@ -13,10 +13,15 @@ interface Props {
 }
 
 function Event ({ className = '', value: { event } }: Props): React.ReactElement<Props> {
+  let summary = `${event.section}.${event.method}`;
+  if (event.section === 'product' && event.method === 'TxList')
+      summary = 'item.addToCatalog';
+  if (event.section === 'product' && event.method === 'TxOrder')
+      summary = 'item.confirmOrder';
   return (
     <Expander
       className={className}
-      summary={`${event.section}.${event.method}`}
+      summary={summary}
       summaryMeta={event.meta}
     >
       <EventDisplay
