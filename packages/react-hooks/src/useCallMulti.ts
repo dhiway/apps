@@ -1,4 +1,4 @@
-// Copyright 2017-2021 @polkadot/react-hooks authors & contributors
+// Copyright 2017-2022 @polkadot/react-hooks authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ApiPromise } from '@polkadot/api';
@@ -8,8 +8,10 @@ import type { MountedRef } from './useIsMountedRef';
 
 import { useEffect, useRef, useState } from 'react';
 
+import { isUndefined } from '@polkadot/util';
+
 import { useApi } from './useApi';
-import { transformIdentity, unsubscribe } from './useCall';
+import { handleError, transformIdentity, unsubscribe } from './useCall';
 import { useIsMountedRef } from './useIsMountedRef';
 
 interface TrackerRef {
@@ -33,19 +35,28 @@ function subscribe <T> (api: ApiPromise, mountedRef: MountedRef, tracker: Tracke
       if (filtered.length) {
         // swap to active mode
         tracker.current.isActive = true;
-
         tracker.current.subscriber = api.queryMulti(filtered, (value): void => {
           // we use the isActive flag here since .subscriber may not be set on immediate callback)
           if (mountedRef.current && tracker.current.isActive) {
             let valueIndex = -1;
 
-            mountedRef.current && tracker.current.isActive && setValue(
-              transform(
-                calls.map((_, index) => included[index] ? value[++valueIndex] : undefined)
-              )
-            );
+            if (mountedRef.current && tracker.current.isActive) {
+              try {
+                setValue(
+                  transform(
+                    calls.map((_, index) =>
+                      included[index]
+                        ? value[++valueIndex]
+                        : undefined
+                    )
+                  )
+                );
+              } catch (error) {
+                handleError(error as Error, tracker);
+              }
+            }
           }
-        });
+        }).catch((error) => handleError(error as Error, tracker));
       } else {
         tracker.current.subscriber = null;
       }
@@ -54,11 +65,12 @@ function subscribe <T> (api: ApiPromise, mountedRef: MountedRef, tracker: Tracke
 }
 
 // very much copied from useCall
+// FIXME This is generic, we cannot really use createNamedHook
 export function useCallMulti <T> (calls?: QueryableStorageMultiArg<'promise'>[] | null | false, options?: CallOptions<T>): T {
   const { api } = useApi();
   const mountedRef = useIsMountedRef();
-  const tracker = useRef<Tracker>({ isActive: false, serialized: null, subscriber: null });
-  const [value, setValue] = useState<T>((options || {}).defaultValue || [] as unknown as T);
+  const tracker = useRef<Tracker>({ error: null, fn: null, isActive: false, serialized: null, subscriber: null, type: 'useCallMulti' });
+  const [value, setValue] = useState<T>(() => (isUndefined((options || {}).defaultValue) ? [] : (options || {}).defaultValue) as unknown as T);
 
   // initial effect, we need an un-subscription
   useEffect((): () => void => {
@@ -78,6 +90,8 @@ export function useCallMulti <T> (calls?: QueryableStorageMultiArg<'promise'>[] 
       }
     }
   }, [api, calls, options, mountedRef]);
+
+  // throwOnError(tracker.current);
 
   return value;
 }

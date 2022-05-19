@@ -1,18 +1,17 @@
-// Copyright 2017-2021 @polkadot/app-parachains authors & contributors
+// Copyright 2017-2022 @polkadot/app-parachains authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type BN from 'bn.js';
+import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import type { LinkOption } from '@polkadot/apps-config/endpoints/types';
 import type { Option } from '@polkadot/apps-config/settings/types';
-import type { XcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { BN } from '@polkadot/util';
 
 import React, { useMemo, useState } from 'react';
 
-import { getTeleportWeight } from '@polkadot/apps-config';
 import { ChainImg, Dropdown, InputAddress, InputBalance, MarkWarning, Modal, Spinner, TxButton } from '@polkadot/react-components';
-import { useApi, useApiUrl, useTeleport, useWeightFee } from '@polkadot/react-hooks';
+import { useApi, useApiUrl, useTeleport } from '@polkadot/react-hooks';
 import { Available } from '@polkadot/react-query';
-import { BN_ZERO } from '@polkadot/util';
+import { BN_ZERO, isFunction } from '@polkadot/util';
 
 import { useTranslation } from './translate';
 
@@ -21,6 +20,7 @@ interface Props {
 }
 
 const INVALID_PARAID = Number.MAX_SAFE_INTEGER;
+const XCM_LOC = ['xcm', 'xcmPallet', 'polkadotXcm'];
 
 function createOption ({ info, paraId, text }: LinkOption): Option {
   return {
@@ -49,15 +49,12 @@ function Teleport ({ onClose }: Props): React.ReactElement<Props> | null {
   const [recipientParaId, setParaId] = useState(INVALID_PARAID);
   const { allowTeleport, destinations, isParaTeleport, oneWay } = useTeleport();
 
-  const [destWeight, call] = useMemo(
-    () => [
-      getTeleportWeight(api),
-      (
-        (api.tx.xcm && api.tx.xcm.teleportAssets) ||
-        (api.tx.xcmPallet && api.tx.xcmPallet.teleportAssets) ||
-        (api.tx.polkadotXcm && api.tx.polkadotXcm.teleportAssets)
-      )
-    ],
+  const call = useMemo(
+    (): SubmittableExtrinsicFunction<'promise'> => {
+      const m = XCM_LOC.filter((x) => api.tx[x] && isFunction(api.tx[x].limitedTeleportAssets))[0];
+
+      return api.tx[m].limitedTeleportAssets;
+    },
     [api]
   );
 
@@ -76,36 +73,59 @@ function Teleport ({ onClose }: Props): React.ReactElement<Props> | null {
   );
 
   const destApi = useApiUrl(url);
-  const weightFee = useWeightFee(destWeight, destApi);
 
   const params = useMemo(
-    () => {
-      // From Polkadot runtime 9110 (no destination weight)
-      // Get first item, it should have V0, V1, ...
-      const firstType = api.createType<XcmVersionedMultiLocation>(call.meta.args[0].type.toString());
-      const isCurrent = firstType.defKeys.includes('V1');
-
-      const dst = isParaTeleport
-        ? { X1: 'Parent' }
-        : { X1: { ParaChain: recipientParaId } };
-      const acc = { X1: { AccountId32: { id: api.createType('AccountId32', recipientId).toHex(), network: 'Any' } } };
-      const ass = isParaTeleport
-        ? [{ ConcreteFungible: { amount, id: { X1: 'Parent' } } }]
-        // forgo id - 'Here' for 9100, 'Null' for 9110 (both is the default enum value)
-        : [{ ConcreteFungible: { amount } }];
-
-      return isCurrent
-        ? call.meta.args.length === 5
-          // Polkadot 9100
-          ? [{ V0: dst }, { V0: acc }, { V0: ass }, 0, destWeight]
-          // Polkadot 9110
-          : [{ V0: dst }, { V0: acc }, { V0: ass }, 0]
-        : [dst, acc, ass, destWeight];
-    },
-    [api, amount, call, destWeight, isParaTeleport, recipientId, recipientParaId]
+    () => [
+      {
+        V1: isParaTeleport
+          ? {
+            interior: 'Here',
+            parents: 1
+          }
+          : {
+            interior: {
+              X1: {
+                ParaChain: recipientParaId
+              }
+            },
+            parents: 0
+          }
+      },
+      {
+        V1: {
+          interior: {
+            X1: {
+              AccountId32: {
+                id: api.createType('AccountId32', recipientId).toHex(),
+                network: 'Any'
+              }
+            }
+          },
+          parents: 0
+        }
+      },
+      {
+        V1: [{
+          fun: {
+            Fungible: amount
+          },
+          id: {
+            Concrete: {
+              interior: 'Here',
+              parents: isParaTeleport
+                ? 1
+                : 0
+            }
+          }
+        }]
+      },
+      0,
+      { Unlimited: null }
+    ],
+    [api, amount, isParaTeleport, recipientId, recipientParaId]
   );
 
-  const hasAvailable = !!amount && amount.gte(weightFee);
+  const hasAvailable = !!amount;
 
   return (
     <Modal
@@ -150,8 +170,8 @@ function Teleport ({ onClose }: Props): React.ReactElement<Props> | null {
         <Modal.Columns
           hint={
             <>
-              <p>{t<string>('If the recipient account is new, the balance needs to be more than the existential deposit on the recipient chain.')}</p>
-              <p>{t<string>('The amount deposited to the recipient will be net the calculated cross-chain fee.')}</p>
+              <p>{t<string>('This is the amount to be teleported to the destination chain and does not account for the source or the destination transfer fee')}</p>
+              <p>{t<string>('The amount deposited to the recipient will be net the calculated cross-chain fee. If the recipient address is new, the amount deposited should be greater than the Existential Deposit')}</p>
             </>
           }
         >
@@ -163,20 +183,17 @@ function Teleport ({ onClose }: Props): React.ReactElement<Props> | null {
             onChange={setAmount}
           />
           {destApi
-            ? (
-              <>
-                <InputBalance
-                  defaultValue={weightFee}
-                  isDisabled
-                  label={t<string>('destination transfer fee')}
-                />
-                <InputBalance
-                  defaultValue={destApi.consts.balances.existentialDeposit}
-                  isDisabled
-                  label={t<string>('destination existential deposit')}
-                />
-              </>
-            )
+            ? destApi.consts.balances
+              ? (
+                <>
+                  <InputBalance
+                    defaultValue={destApi.consts.balances.existentialDeposit}
+                    isDisabled
+                    label={t<string>('destination existential deposit')}
+                  />
+                </>
+              )
+              : null
             : (
               <Spinner
                 label={t<string>('Retrieving destination chain fees')}

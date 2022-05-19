@@ -1,4 +1,4 @@
-// Copyright 2017-2020 @polkadot/react-hooks authors & contributors
+// Copyright 2017-2022 @polkadot/react-hooks authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ApiPromise } from '@polkadot/api';
@@ -11,9 +11,12 @@ import { knownGenesis, knownLedger } from '@polkadot/networks/defaults';
 import uiSettings from '@polkadot/ui-settings';
 import { assert } from '@polkadot/util';
 
+import { createNamedHook } from './createNamedHook';
 import { useApi } from './useApi';
 
 interface StateBase {
+  hasLedgerChain: boolean;
+  hasWebUsb: boolean;
   isLedgerCapable: boolean;
   isLedgerEnabled: boolean;
 }
@@ -23,6 +26,8 @@ interface State extends StateBase {
 }
 
 const EMPTY_STATE: StateBase = {
+  hasLedgerChain: false,
+  hasWebUsb: false,
   isLedgerCapable: false,
   isLedgerEnabled: false
 };
@@ -52,15 +57,18 @@ function retrieveLedger (api: ApiPromise): Ledger {
 }
 
 function getState (api: ApiPromise): StateBase {
-  const isLedgerCapable = hasWebUsb && ledgerHashes.includes(api.genesisHash.toHex());
+  const hasLedgerChain = ledgerHashes.includes(api.genesisHash.toHex());
+  const isLedgerCapable = hasWebUsb && hasLedgerChain;
 
   return {
+    hasLedgerChain,
+    hasWebUsb,
     isLedgerCapable,
     isLedgerEnabled: isLedgerCapable && uiSettings.ledgerConn !== 'none'
   };
 }
 
-export function useLedger (): State {
+function useLedgerImpl (): State {
   const { api, isApiReady } = useApi();
 
   const getLedger = useCallback(
@@ -73,3 +81,5 @@ export function useLedger (): State {
     [api, getLedger, isApiReady]
   );
 }
+
+export const useLedger = createNamedHook('useLedger', useLedgerImpl);
