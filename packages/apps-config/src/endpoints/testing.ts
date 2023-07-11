@@ -22,4 +22,11 @@ export const testChains: EndpointOption[] = [
         'Cord Network': 'wss://staging.cord.network'
       }
     },
+    {
+      info: 'Sparknet',
+      text: 'BuilderNet (CORD v2)',
+      providers: {
+        'Cord Network': 'wss://sparknet.cord.network'
+      }
+    },
 ];

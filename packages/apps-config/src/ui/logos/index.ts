@@ -747,6 +747,7 @@ export const namedLogos: Record<string, unknown> = {
   'CORD Staging Testnet': chainCordStaging,
   'Amber Glow': chainCordStaging,
   'Amber Glow (v2)': chainCordStaging,
+  'Sparknet':chainCordStaging,
   'Royal Blue (Studio)': chainRoyalBlue,
   'Royal Blue': chainRoyalBlue,
   'Custom': chainCordUnknown,

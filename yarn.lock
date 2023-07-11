@@ -1493,11 +1493,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cord.network/type-definitions@portal:/Users/smohan/dev/smohan-dw/compare/cord.js/packages/type-definitions::locator=polkadot-apps%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@cord.network/type-definitions@portal:/Users/smohan/dev/smohan-dw/compare/cord.js/packages/type-definitions::locator=polkadot-apps%40workspace%3A."
+"@cord.network/type-definitions@npm:^0.8.1-beta.0":
+  version: 0.8.1-beta.1
+  resolution: "@cord.network/type-definitions@npm:0.8.1-beta.1"
+  checksum: 4b7173aa307be84dd33dc86ea4beaf61495a2a3bc39edb1f861c458be38e8f5a56bb7d1542a29c1c4c2d0bb243a15daf27092ccd08b9977c9433f31772cd6061
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@crustio/crust-pin@npm:^1.0.0":
   version: 1.0.0
