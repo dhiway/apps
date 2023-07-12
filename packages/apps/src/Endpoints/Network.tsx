@@ -61,7 +61,7 @@ function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, 
                   ? t<string>('{{relay}} System', { replace: { relay } })
                   : paraId && paraId < 2000
                     ? t<string>('{{relay}} Common', { replace: { relay } })
-                    : t<string>('{{relay}} Parachain', { replace: { relay } })
+                    : t<string>('{{relay}}', { replace: { relay } })
               }
             </div>
           )}
