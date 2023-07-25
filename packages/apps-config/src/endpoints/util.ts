@@ -8,8 +8,6 @@ interface SortOption {
   isUnreachable?: boolean;
 }
 
-let dummyId = 0;
-
 function sortNoop (): number {
   return 0;
 }
@@ -72,7 +70,7 @@ function expandEndpoint (t: TFunction, { dnslink, genesisHash, homepage, info, i
     .entries(
       hasProviders
         ? providers
-        : { Placeholder: `wss://${++dummyId}` }
+        : { Placeholder: `wss://sparknet.cord.network` }
     )
     .filter((_, index) => !firstOnly || index === 0)
     .map(([host, value], index): LinkOption => ({
