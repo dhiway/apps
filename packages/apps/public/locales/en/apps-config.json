@@ -1,4 +1,5 @@
 {
+  "cord": "LIVE NETWORKS",
   "lightclient.experimental": "light client (experimental)",
   "lng.detect": "Default browser language (auto-detect)",
   "rpc.dev.custom": "Custom environment",
@@ -13,5 +14,6 @@
   "rpc.header.test": "Test networks",
   "rpc.header.westend.relay": "Test Westend & parachains",
   "rpc.hosted.via": "via {{host}}",
-  "ss58.default": "Default for the connected node"
+  "ss58.default": "Default for the connected node",
+  "test": "TEST NETWORKS"
 }

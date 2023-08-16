@@ -27,7 +27,7 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       isDisabled: false,
       isHeader: true,
       isSpaced: true,
-      text: t('rpc.header.polkadot.relay', 'LIVE NETWORKS', { ns: 'apps-config' }),
+      text: t('cord', 'LIVE NETWORKS', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
       value: ''
@@ -36,7 +36,7 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
     {
       isDisabled: false,
       isHeader: true,
-      text: t('rpc.header.kusama.relay', 'TEST NETWORKS', { ns: 'apps-config' }),
+      text: t('test', 'TEST NETWORKS', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
       value: ''

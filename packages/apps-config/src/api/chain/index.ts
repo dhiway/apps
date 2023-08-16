@@ -3,7 +3,10 @@
 
 import type { OverrideBundleDefinition } from '@polkadot/types/types';
 
+import cord from './kilt';
+
 const chain: Record<string, OverrideBundleDefinition> = {
+ 'Sparknet': cord['Sparknet']
 };
 
 export default chain;
