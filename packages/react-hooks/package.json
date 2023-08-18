@@ -17,8 +17,7 @@
   "version": "0.132.2-52-x",
   "dependencies": {
     "@polkadot/hw-ledger": "^12.3.2",
-    "@polkadot/hw-ledger-transports": "^12.3.2",
-    "is-ipfs": "^8.0.1"
+    "@polkadot/hw-ledger-transports": "^12.3.2"
   },
   "peerDependencies": {
     "react": "*",

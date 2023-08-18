@@ -6,7 +6,7 @@ import '@polkadot/x-textdecoder/shim';
 
 import type { CallOptions } from './types.js';
 
-import * as isIPFS from 'is-ipfs';
+//import * as isIPFS from 'is-ipfs';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useIsMountedRef } from './useIsMountedRef.js';
@@ -16,7 +16,8 @@ interface Options <T> extends CallOptions<T> {
 }
 
 function isCid (cid: string): boolean {
-  return !!cid && (isIPFS.cid(cid) || isIPFS.base32cid(cid.toLowerCase()));
+  return !!cid;
+  //return !!cid && (isIPFS.cid(cid) || isIPFS.base32cid(cid.toLowerCase()));
 }
 
 const cache = new Map<string, any>();
