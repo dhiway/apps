@@ -34,7 +34,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       'CORD Network': 'wss://sprintnet.cord.network/',
     },
-    text: 'Sprintnet',
+    text: 'Sprintnet (v2 staging)',
     ui: {
       color: '#40172F',
       logo: cordIcon
