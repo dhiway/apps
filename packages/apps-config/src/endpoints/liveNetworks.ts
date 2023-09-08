@@ -32,9 +32,9 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'Amber glow',
     paraId: 2124,
     providers: {
-      'CORD Network': 'wss://staging.cord.network/',
+      'CORD Network': 'wss://sprintnet.cord.network/',
     },
-    text: 'Amber Glow (v2 staging)',
+    text: 'Sprintnet',
     ui: {
       color: '#40172F',
       logo: cordIcon
