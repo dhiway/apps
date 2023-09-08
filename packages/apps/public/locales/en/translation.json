@@ -1836,6 +1836,7 @@
   "{{name}} ({{size}} bytes)": "",
   "{{percentage}}% of block weight": "",
   "{{percentage}}% turnout": "",
+  "{{relay}} ": "",
   "{{relay}} Common": "",
   "{{relay}} Parachain": "",
   "{{relay}} System": "",

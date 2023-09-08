@@ -58,10 +58,10 @@ function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, 
               {isRelay
                 ? t('Relay chain')
                 : paraId && paraId < 1000
-                  ? t('{{relay}} ', { replace: { relay } })
+                  ? t('{{relay}} testnet', { replace: { relay } })
                   : paraId && paraId < 2000
-                    ? t('{{relay}} ', { replace: { relay } })
-                    : t('{{relay}} ', { replace: { relay } })
+                    ? t('{{relay}} testnet', { replace: { relay } })
+                    : t('{{relay}} testnet', { replace: { relay } })
               }
             </div>
           )}
