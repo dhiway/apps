@@ -3,12 +3,11 @@
 
 import type { Call } from '@polkadot/types/interfaces';
 import type { ICompact, INumber } from '@polkadot/types/types';
-import type { BN } from '@polkadot/util';
 import type { V2WeightConstruct, WeightResult } from './types.js';
 
 import { useEffect, useState } from 'react';
 
-import { BN_ZERO, isFunction, nextTick, objectSpread } from '@polkadot/util';
+import { BN, BN_ONE, BN_ZERO, isFunction, nextTick, objectSpread } from '@polkadot/util';
 
 import { createNamedHook } from './createNamedHook.js';
 import { useApi } from './useApi.js';
@@ -29,6 +28,8 @@ interface Result extends WeightResult {
 
 // this is 32 bytes in length, it allows construction for both AccountId32 & AccountId20
 export const ZERO_ACCOUNT = '0x9876543210abcdef9876543210abcdef9876543210abcdef9876543210abcdef';
+
+const DEF_CALL_WEIGHT = new BN(1_000_000_000);
 
 const EMPTY_STATE: Partial<Result> = {
   encodedCallLength: 0,
@@ -88,6 +89,17 @@ function useWeightImpl (call?: Call | null): Result {
           console.error(error);
         }
       });
+    } else if (call) {
+      setState((prev) =>
+        objectSpread({}, prev, {
+          encodedCallLength: call.encodedLength,
+          v1Weight: DEF_CALL_WEIGHT,
+          v2Weight: { refTime: DEF_CALL_WEIGHT },
+          weight: prev.isWeightV2
+            ? DEF_CALL_WEIGHT
+            : { refTime: DEF_CALL_WEIGHT }
+        })
+      );
     } else {
       setState((prev) =>
         objectSpread({}, prev, EMPTY_STATE)

@@ -1,4 +1,15 @@
 {
   "eslint.enable": true,
-  "eslint.experimental.useFlatConfig": true
+  "eslint.experimental.useFlatConfig": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#26394d",
+    "statusBarItem.hoverBackground": "#26394d",
+    "statusBarItem.remoteBackground": "#15202b",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#15202b99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
 }
