@@ -20,6 +20,7 @@
   "transfer received": "transfer received",
   "update on #{{index}}": "update on #{{index}}",
   "{{relay}}": "{{relay}}",
+  "{{relay}} ": "{{relay}} ",
   "{{relay}} Common": "{{relay}} Common",
   "{{relay}} Parachain": "{{relay}} Parachain",
   "{{relay}} System": "{{relay}} System"
