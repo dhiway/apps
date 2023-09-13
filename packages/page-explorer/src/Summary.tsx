@@ -5,7 +5,7 @@ import React from 'react';
 
 import { CardSummary, SummaryBox } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
-import { BestFinalized, BestNumber, BlockToTime, TimeNow, TotalInactive, TotalIssuance } from '@polkadot/react-query';
+import { BestFinalized, BestNumber, BlockToTime, TimeNow} from '@polkadot/react-query';
 import { BN_ONE, formatNumber } from '@polkadot/util';
 
 import SummarySession from './SummarySession.js';
@@ -33,24 +33,6 @@ function Summary ({ eventCount }: Props): React.ReactElement {
             >
               <BlockToTime value={BN_ONE} />
             </CardSummary>
-          </>
-        )}
-        {api.query.balances && (
-          <>
-            <CardSummary
-              className='media--800'
-              label={t('total issuance')}
-            >
-              <TotalIssuance />
-            </CardSummary>
-            {!!api.query.balances.inactiveIssuance && (
-              <CardSummary
-                className='media--1300'
-                label={t('inactive issuance')}
-              >
-                <TotalInactive />
-              </CardSummary>
-            )}
           </>
         )}
       </section>

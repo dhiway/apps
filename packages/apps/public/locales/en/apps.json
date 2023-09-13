@@ -23,5 +23,6 @@
   "{{relay}} ": "{{relay}} ",
   "{{relay}} Common": "{{relay}} Common",
   "{{relay}} Parachain": "{{relay}} Parachain",
-  "{{relay}} System": "{{relay}} System"
+  "{{relay}} System": "{{relay}} System",
+  "{{relay}} testnet": "{{relay}} testnet"
 }
