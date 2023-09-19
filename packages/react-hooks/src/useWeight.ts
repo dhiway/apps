@@ -7,7 +7,7 @@ import type { V2WeightConstruct, WeightResult } from './types.js';
 
 import { useEffect, useState } from 'react';
 
-import { BN, BN_ONE, BN_ZERO, isFunction, nextTick, objectSpread } from '@polkadot/util';
+import { BN, BN_ZERO, isFunction, nextTick, objectSpread } from '@polkadot/util';
 
 import { createNamedHook } from './createNamedHook.js';
 import { useApi } from './useApi.js';
