@@ -218,8 +218,8 @@ function AccountName ({ children, className = '', defaultName, label, onClick, o
           })
             .then((response) => {
               if (response.status === 200) {
-                response.json().then((data: {result: {displayName: string}}) => {
-                  if (data?.result && data?.result.displayName && data.result.displayName !== undefined && typeof data.result.displayName === 'string') {
+                response.json().then((data: {result: {displayName: string, verified: boolean}}) => {
+                  if (data?.result && data?.result.displayName && data.result.displayName !== undefined && typeof data.result.displayName === 'string' && data.result.verified === true) {
                     setName(() =>
                       identity?.display
                         ? extractIdentity(cacheAddr, identity)
