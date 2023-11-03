@@ -75,6 +75,7 @@ const MATCHERS: AddrMatcher[] = [
 const displayCache = new Map<string, React.ReactNode>();
 const indexCache = new Map<string, string>();
 const parentCache = new Map<string, string>();
+const nameCache = new Map<string, string>();
 
 export function getParentAccount (value: string): string | undefined {
   return parentCache.get(value);
@@ -195,11 +196,49 @@ function AccountName ({ children, className = '', defaultName, label, onClick, o
     }
 
     if (api && isFunction(api.query.identity?.identityOf)) {
-      setName(() =>
-        identity?.display
-          ? extractIdentity(cacheAddr, identity)
-          : extractName(cacheAddr, accountIndex)
-      );
+      if (accountId) {
+        if (nameCache.get(cacheAddr)) {
+          if (nameCache.get(cacheAddr) !== 'notSet') {
+            setName(() =>
+              identity?.display
+                ? extractIdentity(cacheAddr, identity)
+                : extractName(cacheAddr, accountIndex, nameCache.get(cacheAddr))
+            );
+          } else {
+            setName(() =>
+              identity?.display
+                ? extractIdentity(cacheAddr, identity)
+                : extractName(cacheAddr, accountIndex)
+            );
+          }
+        } else {
+          fetch('https://trust.demo.cord.network/api/v1/mapping/getDetails/' + cacheAddr, {
+            credentials: 'include',
+            method: 'GET'
+          })
+            .then((response) => {
+              if (response.status === 200) {
+                response.json().then((data: {result: {displayName: string, verified: boolean}}) => {
+                  if (data?.result && data?.result.displayName && data.result.displayName !== undefined && typeof data.result.displayName === 'string' && data.result.verified === true) {
+                    setName(() =>
+                      identity?.display
+                        ? extractIdentity(cacheAddr, identity)
+                        : extractName(cacheAddr, accountIndex, nameCache.get(cacheAddr))
+                    );
+                    nameCache.set(cacheAddr, data.result.displayName);
+                  } else {
+                    nameCache.set(cacheAddr, 'notSet');
+                  }
+                }).catch((error) => {
+                  console.log('Error', error);
+                });
+              }
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }
+      }
     } else if (nickname) {
       setName(nickname);
     } else {
