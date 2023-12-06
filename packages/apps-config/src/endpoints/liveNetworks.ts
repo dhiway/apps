@@ -53,6 +53,32 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
       logo: cordIcon
     }
   },
+    {
+    homepage: 'https://cord.network/',
+    info: 'Confidex',
+    paraId: 2088,
+    providers: {
+      'Confidex':"wss://confidex-alpha1.cord.network/",
+    },
+    text: 'Confidex',
+    ui: {
+      color: '#40172F',
+      logo: cordIcon
+    }
+  },
+      {
+    homepage: 'https://cord.network/',
+    info: 'NPCI',
+    paraId: 2088,
+    providers: {
+      'NPCI':"wss://asset-token.cord.network/",
+    },
+    text: 'NPCI',
+    ui: {
+      color: '#40172F',
+      logo: cordIcon
+    }
+  },
 ];
 
 export const prodParasKusamaCommon: EndpointOption[] = [
