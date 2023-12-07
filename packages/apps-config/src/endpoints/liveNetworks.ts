@@ -71,7 +71,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'NPCI',
     paraId: 2088,
     providers: {
-      'NPCI':"wss://asset-token.cord.network/",
+      'NPCI Test':"wss://asset-token.cord.network/",
     },
     text: 'NPCI',
     ui: {
