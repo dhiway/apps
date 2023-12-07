@@ -55,7 +55,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
   },
     {
     homepage: 'https://cord.network/',
-    info: 'Confidex',
+    info: 'Confidex Alpha',
     paraId: 2088,
     providers: {
       'Confidex':"wss://confidex-alpha1.cord.network/",
