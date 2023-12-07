@@ -73,7 +73,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       'NPCI Test':"wss://asset-token.cord.network/",
     },
-    text: 'NPCI',
+    text: 'NPCI Test',
     ui: {
       color: '#40172F',
       logo: cordIcon
