@@ -60,7 +60,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       'Confidex Alpha':"wss://confidex-alpha1.cord.network/",
     },
-    text: 'Confidex',
+    text: 'Confidex Alpha',
     ui: {
       color: '#40172F',
       logo: cordIcon
