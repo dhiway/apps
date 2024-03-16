@@ -10,6 +10,13 @@
     "statusBarItem.remoteForeground": "#e7e7e7",
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#15202b99",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "tab.activeBackground": "#282c34",
+    "sideBar.background": "#282c34",
+    "activityBar.activeBackground": "#131214",
+    "activityBarBadge.foreground": "#15202b",
+    "eslint.workingDirectories": [
+      "src"
+    ]
   },
 }

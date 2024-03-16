@@ -1,22 +1,32 @@
+/* eslint-disable header/header */
 // Copyright 2017-2023 @polkadot/app-explorer authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { HeaderExtended } from '@polkadot/api-derive/types';
+import type { BlockNumber } from '@polkadot/types/interfaces';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddressSmall } from '@polkadot/react-components';
+import { AddressSmall, Icon } from '@polkadot/react-components';
 import { formatNumber } from '@polkadot/util';
 
 interface Props {
   value: HeaderExtended;
+  bestNumberFinalized?: BlockNumber;
 }
 
-function BlockHeader ({ value }: Props): React.ReactElement<Props> | null {
-  if (!value) {
-    return null;
-  }
+function BlockHeader ({ bestNumberFinalized, value }: Props): React.ReactElement<Props> | null {
+  const isFinalized = useMemo(() => {
+    return bestNumberFinalized && bestNumberFinalized.toNumber() >= value.number.toNumber();
+  },
+  [bestNumberFinalized, value]
+  );
+
+  // function BlockHeader ({ value }: Props): React.ReactElement<Props> | null {
+  //   if (!value) {
+  //     return null;
+  //   }
 
   const hashHex = value.hash.toHex();
 
@@ -32,6 +42,14 @@ function BlockHeader ({ value }: Props): React.ReactElement<Props> | null {
         {value.author && (
           <AddressSmall value={value.author} />
         )}
+      </td>
+      <td className='finalizedIcon'>
+        {isFinalized
+          ? <Icon
+            className='highlight--finalized--color'
+            icon='circle-check'
+          />
+          : null}
       </td>
     </tr>
   );
