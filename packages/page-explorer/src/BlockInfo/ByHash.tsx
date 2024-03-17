@@ -1,5 +1,4 @@
-/* eslint-disable header/header */
-// Copyright 2017-2023 @polkadot/app-explorer authors & contributors
+// Copyright 2017-2024 @polkadot/app-explorer authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { HeaderExtended } from '@polkadot/api-derive/types';
@@ -9,7 +8,7 @@ import type { BlockNumber, EventRecord, RuntimeVersionPartial, SignedBlock } fro
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddressSmall, Columar, Icon, LinkExternal, MarkError, Table } from '@polkadot/react-components';
+import { AddressSmall, Columar, Icon, MarkError, Table } from '@polkadot/react-components';
 import { useApi, useCall, useIsMountedRef } from '@polkadot/react-hooks';
 import { convertWeight } from '@polkadot/react-hooks/useWeight';
 import { formatNumber } from '@polkadot/util';
@@ -38,7 +37,7 @@ const EMPTY_HEADER: [React.ReactNode?, string?, number?][] = [['...', 'start', 7
 
 function transformResult ([[runtimeVersion, events], getBlock, getHeader]: [[RuntimeVersionPartial, EventRecord[] | null], SignedBlock, HeaderExtended?]): State {
   return {
-    events: events && events.map((record, index) => ({
+    events: events?.map((record, index) => ({
       indexes: [index],
       key: `${Date.now()}-${index}-${record.hash.toHex()}`,
       record
@@ -71,7 +70,7 @@ function BlockByHash ({ className = '', error, value }: Props): React.ReactEleme
   }, [error]);
 
   const systemEvents = useMemo(
-    () => events && events.filter(({ record: { phase } }) => !phase.isApplyExtrinsic),
+    () => events?.filter(({ record: { phase } }) => !phase.isApplyExtrinsic),
     [events]
   );
 

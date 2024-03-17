@@ -1,13 +1,13 @@
-// Copyright 2017-2023 @polkadot/apps-config authors & contributors
+// Copyright 2017-2024 @polkadot/apps-config authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { EndpointOption } from './types.js';
 
+import { cordIcon } from './icon-svg.js';
+import { getTeleports } from './util.js';
+
 export * from './liveNetworks.js';
 export * from './testNetworks.js';
-
-import { cordIcon } from './icon-svg.js'
-import { getTeleports } from './util.js';
 
 // The available endpoints that will show in the dropdown. For the most part (with the exception of
 // Polkadot) we try to keep this to live chains only, with RPCs hosted by the community/chain vendor
@@ -17,12 +17,12 @@ import { getTeleports } from './util.js';
 //
 // IMPORTANT: Alphabetical based on text
 export const prodParasRB: Omit<EndpointOption, 'teleport'>[] = [
- {
+  {
     homepage: 'https://cord.network/',
     info: 'Royal Blue',
     paraId: 2000,
     providers: {
-      'Production (v1)':"wss://royal-blue.dway.io/",
+      'Production (v1)': 'wss://royal-blue.dway.io/'
     },
     text: 'Royal Blue',
     ui: {
@@ -33,7 +33,7 @@ export const prodParasRB: Omit<EndpointOption, 'teleport'>[] = [
 ];
 
 export const prodParasRBCommon: EndpointOption[] = [
-  
+
 ];
 
 export const prodChains: EndpointOption = {
@@ -54,4 +54,3 @@ export const prodChains: EndpointOption = {
     logo: cordIcon
   }
 };
-

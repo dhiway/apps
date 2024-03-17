@@ -1,4 +1,4 @@
-// Copyright 2017-2023 @polkadot/apps-config authors & contributors
+// Copyright 2017-2024 @polkadot/apps-config authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // The list of Ethereum networks, for these the UI will default to Ethereum-only accounts
@@ -13,6 +13,7 @@ export const ethereumChains = [
   'moonsama',
   'moonshadow',
   'altbeacon',
+  'altbeacon-dev',
   'alt-producer',
   'flash-layer',
   'armonia-eva',
@@ -29,5 +30,10 @@ export const ethereumChains = [
   'dracones-dwarf',
   'subspace-evm-domain',
   'ferrum-parachain',
-  'quantum-portal-network-parachain'
+  'quantum-portal-network-parachain',
+  'peerplays',
+  'innovatorchain',
+  'masverse',
+  'laos',
+  'muse'
 ];
