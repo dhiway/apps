@@ -301,13 +301,6 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
       buttons={
         <>
           <Button
-            icon='code-fork'
-            isDisabled={canLocalFork}
-            label={t('Fork Locally')}
-            onClick={_onLocalFork}
-            tooltip='fork-locally-btn'
-          />
-          <Button
             icon='sync'
             isDisabled={canSwitch}
             label={t('Switch')}

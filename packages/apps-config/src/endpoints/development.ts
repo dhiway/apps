@@ -4,6 +4,8 @@
 import type { TFunction } from '../types.js';
 import type { LinkOption } from './types.js';
 
+import { cordIcon } from './icon-svg.js';
+
 export const CUSTOM_ENDPOINT_KEY = 'polkadot-app-custom-endpoints';
 
 interface EnvWindow {
@@ -32,7 +34,9 @@ export function createCustom (t: TFunction): LinkOption[] {
         info: 'WS_URL',
         text: t('rpc.dev.custom.entry', 'Custom {{WS_URL}}', { ns: 'apps-config', replace: { WS_URL } }),
         textBy: WS_URL,
-        ui: {},
+        ui: { color: '#000000',
+          identityIcon: 'polkadot',
+          logo: cordIcon },
         value: WS_URL
       }
     ]
@@ -53,7 +57,9 @@ export function createOwn (t: TFunction): LinkOption[] {
         info: 'local',
         text: t('rpc.dev.custom.own', 'Custom', { ns: 'apps-config' }),
         textBy,
-        ui: {},
+        ui: { color: '#000000',
+          identityIcon: 'polkadot',
+          logo: cordIcon },
         value: textBy
       }));
     }
@@ -71,7 +77,9 @@ export function createDev (t: TFunction): LinkOption[] {
       info: 'local',
       text: t('rpc.dev.local', 'Local Node', { ns: 'apps-config' }),
       textBy: '127.0.0.1:9944',
-      ui: {},
+      ui: { color: '#000000',
+        identityIcon: 'polkadot',
+        logo: cordIcon },
       value: 'ws://127.0.0.1:9944'
     }
   ];
