@@ -1,8 +1,8 @@
-// Copyright 2017-2023 @polkadot/apps-config authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+// // Copyright 2017-2023 @polkadot/apps-config authors & contributors
+// // SPDX-License-Identifier: Apache-2.0
 
-import type { OverrideBundleDefinition } from '@polkadot/types/types';
+// import type { OverrideBundleDefinition } from '@polkadot/types/types';
 
-import { typesBundle } from '@cord.network/type-definitions';
+// import { typesBundle } from '@cord.network/type-definitions';
 
-export default typesBundle.chain as Record<string, OverrideBundleDefinition>;
+// export default typesBundle.chain as Record<string, OverrideBundleDefinition>;

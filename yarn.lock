@@ -226,10 +226,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cord.network/type-definitions@npm:^0.9.0-1":
-  version: 0.9.0-1
-  resolution: "@cord.network/type-definitions@npm:0.9.0-1"
-  checksum: b211fc61f738358289be73b56f0473384c5cc7fd3df0509f78437abbd86d86a5979d0322b6acd9e9ca1f6f73d91014bcec487344b47318fc4adeb39dd23b497e
+"@cord.network/type-definitions@npm:^0.9.1-0rc":
+  version: 0.9.1
+  resolution: "@cord.network/type-definitions@npm:0.9.1"
+  dependencies:
+    "@polkadot/types": ^10.10.1
+  checksum: 9137f91d821902ada4f8cc09cf127d67513ce20b3df68613b79fec3bee17aa18373b56e368149181f951a78092f32a06cb047bb38a5b217888b4354a68ea1d1f
   languageName: node
   linkType: hard
 
@@ -1936,7 +1938,7 @@ __metadata:
   dependencies:
     "@acala-network/type-definitions": 5.1.1
     "@bifrost-finance/type-definitions": 1.8.4
-    "@cord.network/type-definitions": ^0.9.0-1
+    "@cord.network/type-definitions": ^0.9.1-0rc
     "@crustio/type-definitions": 1.3.0
     "@darwinia/types": 2.8.10
     "@darwinia/types-known": 2.8.10
