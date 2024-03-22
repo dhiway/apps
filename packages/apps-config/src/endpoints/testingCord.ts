@@ -47,7 +47,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     homepage: 'https://cord.network/',
     info: 'NPCI',
     providers: {
-      Dhiway: 'wss://asset-token.cord.network/'
+      Dhiway: 'wss://npci-benchmark.cord.network/'
     },
     text: 'NPCI (staging)',
     ui: {
