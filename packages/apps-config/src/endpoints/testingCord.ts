@@ -7,7 +7,7 @@ import type { EndpointOption } from './types.js';
 import { cordIcon } from './icon-svg.js';
 
 export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
-  {
+/* {
     homepage: 'https:cord.network',
     info: 'Sprintnet',
     providers: {
@@ -18,7 +18,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
       color: '#40172F',
       logo: cordIcon
     }
-  },
+  },*/
   {
     homepage: 'https://cord.network/',
     info: 'Sparknet',
@@ -33,23 +33,11 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
   },
   {
     homepage: 'https://cord.network/',
-    info: 'Confidex',
+    info: 'Confidex-Alpha',
     providers: {
-      Confidex: 'wss://confidex-alpha1.cord.network/'
+      Confidex: 'wss://confidex-alpha.cord.network/'
     },
-    text: 'Confidex (staging)',
-    ui: {
-      color: '#40172F',
-      logo: cordIcon
-    }
-  },
-  {
-    homepage: 'https://cord.network/',
-    info: 'NPCI',
-    providers: {
-      Dhiway: 'wss://npci-benchmark.cord.network/'
-    },
-    text: 'NPCI (staging)',
+    text: 'Confidex Alpha (staging)',
     ui: {
       color: '#40172F',
       logo: cordIcon
