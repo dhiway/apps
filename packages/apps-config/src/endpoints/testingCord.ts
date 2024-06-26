@@ -39,7 +39,19 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Confidex Alpha (staging)',
     ui: {
-      color: '#40172F',
+      color: '#5097fF',
+      logo: cordIcon
+    }
+  },
+  {
+    homepage: 'https://cord.network/',
+    info: 'Finternet-Alpha',
+    providers: {
+      Finternet: 'wss://finternet-alpha.cord.network/'
+    },
+    text: 'Finternet Alpha (staging)',
+    ui: {
+      color: '#20070F',
       logo: cordIcon
     }
   }
