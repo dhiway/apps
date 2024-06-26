@@ -18,5 +18,18 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
       identityIcon: 'polkadot',
       logo: cordIcon
     }
+  },
+  {
+    homepage: 'https://cord.network/',
+    info: 'X One - Protean',
+    providers: {
+      Protean: 'wss://network.proteanx.io/'
+    },
+    text: 'X One - Protean',
+    ui: {
+      color: '#40172F',
+      identityIcon: 'polkadot',
+      logo: cordIcon
+    }
   }
 ];
