@@ -125,7 +125,8 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'communeai',
     providers: {
-      Bitconnect: 'wss://commune-api-node-1.communeai.net'
+      Bitconnect: 'wss://commune-api-node-1.communeai.net',
+      OnFinality: 'wss://commune.api.onfinality.io/public-ws'
     },
     text: 'Commune AI',
     ui: {
@@ -595,7 +596,7 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       Blast: 'wss://vara-mainnet.public.blastapi.io',
       Gear: 'wss://rpc.vara.network',
-      dPRC: 'wss://vara.drpc.org'
+      'P2P.org': 'wss://vara.substrate-rpc.p2p.org/'
     },
     text: 'Vara',
     ui: {

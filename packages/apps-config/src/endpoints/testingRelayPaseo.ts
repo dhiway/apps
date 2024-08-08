@@ -3,8 +3,8 @@
 
 import type { EndpointOption } from './types.js';
 
-import { chainsFrequencyPaseoSVG, chainsLaosOmegaPNG, chainsPaseoPNG, chainsPopNetworkSVG } from '@polkadot/apps-config/ui/logos/chains';
-import { nodesAjunaPNG, nodesAssetHubSVG, nodesBajunPNG, nodesBifrostSVG, nodesDarwiniaKoiSVG, nodesHyperbridgeSVG, nodesIntegriteeSVG, nodesKiltPNG, nodesNodleSVG } from '@polkadot/apps-config/ui/logos/nodes';
+import { chainsFrequencyPaseoSVG, chainsLaosSigmaPNG, chainsPaseoPNG, chainsPopNetworkSVG } from '@polkadot/apps-config/ui/logos/chains';
+import { nodesAjunaPNG, nodesAssetHubSVG, nodesAventusSVG, nodesBajunPNG, nodesBifrostSVG, nodesDarwiniaKoiSVG, nodesHyperbridgeSVG, nodesIntegriteeSVG, nodesKiltPNG, nodesMandalaPNG, nodesMusePNG, nodesNodleSVG } from '@polkadot/apps-config/ui/logos/nodes';
 
 import { PASEO_GENESIS } from '../api/constants.js';
 // import { testnetParachainSVG } from '../ui/logos/nodes/index.js';
@@ -42,6 +42,19 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     ui: {
       color: '#161212',
       logo: nodesAjunaPNG
+    }
+  },
+  {
+    homepage: 'https://www.aventus.io/',
+    info: 'paseoAventus',
+    paraId: 2056,
+    providers: {
+      Aventus: 'wss://public-rpc.testnet.aventus.network'
+    },
+    text: 'Aventus',
+    ui: {
+      color: '#E6E6FA',
+      logo: nodesAventusSVG
     }
   },
   {
@@ -101,7 +114,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     info: 'Hyperbridge',
     paraId: 4009,
     providers: {
-      BlockOps: 'wss://hyperbridge-paseo-rpc.blockops.network'
+      // BlockOps: 'wss://hyperbridge-paseo-rpc.blockops.network' // https://github.com/polkadot-js/apps/issues/10803
     },
     text: 'Hyperbridge (Gargantua)',
     ui: {
@@ -136,15 +149,41 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
   },
   {
     homepage: 'https://laosnetwork.io/',
-    info: 'laos-omega',
+    info: 'laos-sigma',
     paraId: 4006,
     providers: {
-      'freeverse.io': 'wss://rpc.laosomega.laosfoundation.io'
+      'freeverse.io': 'wss://rpc.laossigma.laosfoundation.io'
     },
-    text: 'Laos Omega',
+    text: 'Laos Sigma',
     ui: {
-      color: '#f7f4e7',
-      logo: chainsLaosOmegaPNG
+      color: '#363435',
+      logo: chainsLaosSigmaPNG
+    }
+  },
+  {
+    info: 'muse',
+    paraId: 3369,
+    providers: {
+      Parity: 'wss://paseo-muse-rpc.polkadot.io'
+    },
+    text: 'Muse network',
+    ui: {
+      color: '#110ff9',
+      logo: nodesMusePNG
+    }
+  },
+  {
+    homepage: 'https://mandalachain.io',
+    info: 'Niskala',
+    paraId: 4022,
+    providers: {
+      'Baliola 1': 'wss://mlg1.mandalachain.io',
+      'Baliola 2': 'wss://mlg2.mandalachain.io'
+    },
+    text: 'Niskala',
+    ui: {
+      color: '#0036ac',
+      logo: nodesMandalaPNG
     }
   },
   {
@@ -185,7 +224,8 @@ export const testParasPaseoCommon: EndpointOption[] = [
       Dwellir: 'wss://asset-hub-paseo-rpc.dwellir.com',
       IBP1: 'wss://sys.ibp.network/asset-hub-paseo',
       IBP2: 'wss://sys.dotters.network/asset-hub-paseo',
-      StakeWorld: 'wss://pas-rpc.stakeworld.io/assethub'
+      StakeWorld: 'wss://pas-rpc.stakeworld.io/assethub',
+      TurboFlakes: 'wss://sys.turboflakes.io/asset-hub-paseo'
     },
     teleport: [-1],
     text: 'AssetHub',
