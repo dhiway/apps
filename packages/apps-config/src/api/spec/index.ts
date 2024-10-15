@@ -9,6 +9,7 @@ import altair from './altair.js';
 import apron from './apron.js';
 import aresGladios from './ares-gladios.js';
 import aresParachain from './ares-parachain.js';
+import argon from './argon.js';
 import astar from './astar.js';
 import bajun from './bajun.js';
 import basilisk from './basilisk.js';
@@ -19,6 +20,7 @@ import bifrostParachain from './bifrost-parachain.js';
 import bitcountry from './bitcountry.js';
 import bitcountryPioneer from './bitcountry-pioneer.js';
 import bitcountryParachain from './bitcountry-rococo.js';
+import bittensor from './bittensor.js';
 import centrifuge from './centrifuge.js';
 import centrifugeChain from './centrifuge-chain.js';
 import chainx from './chainx.js';
@@ -65,6 +67,7 @@ import jupiter from './jupiter.js';
 import jupiterRococo from './jupiter-rococo.js';
 import jur from './jur.js';
 import khala from './khala.js';
+import kilt from './kilt.js';
 import konomi from './konomi.js';
 import kpron from './kpron.js';
 import kulupu from './kulupu.js';
@@ -152,6 +155,7 @@ const spec: Record<string, OverrideBundleDefinition> = {
   'ares-gladios': aresGladios,
   'ares-mars': aresParachain,
   'ares-odyssey': aresParachain,
+  argon,
   asgard: bifrostAsgard,
   astar,
   bajun,
@@ -161,6 +165,7 @@ const spec: Record<string, OverrideBundleDefinition> = {
   'bifrost-parachain': bifrostParachain,
   'bitcountry-node': bitcountry,
   'bitcountry-parachain': bitcountryParachain,
+  bittensor,
   centrifuge,
   'centrifuge-chain': centrifugeChain,
   chainx,
@@ -221,6 +226,7 @@ const spec: Record<string, OverrideBundleDefinition> = {
   'jur-node': jur,
   kerria: parallel,
   khala,
+  ...kilt,
   'kintsugi-parachain': interbtc,
   konomi,
   kpron,
