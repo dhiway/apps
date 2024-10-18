@@ -31,6 +31,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
       logo: cordIcon
     }
   },
+/*
   {
     homepage: 'https://cord.network/',
     info: 'Confidex-Alpha',
@@ -43,6 +44,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
       logo: cordIcon
     }
   },
+*/
   {
     homepage: 'https://cord.network/',
     info: 'Finternet-Alpha',
@@ -52,6 +54,18 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     text: 'Finternet Alpha (staging)',
     ui: {
       color: '#20070F',
+      logo: cordIcon
+    }
+  },
+  {
+    homepage: 'https://cord.network/',
+    info: 'CORD Permissionless Testnet',
+    providers: {
+      Finternet: 'wss://registries.demo.cord.network/'
+    },
+    text: 'Permissionless (testnet)',
+    ui: {
+      color: '#40070F',
       logo: cordIcon
     }
   }
