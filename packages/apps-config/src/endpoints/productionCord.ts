@@ -1,0 +1,22 @@
+// Copyright 2017-2024 @polkadot/apps-config authors & contributors
+// SPDX-License-Identifier: Apache-2.0
+
+import type { EndpointOption } from './types.js';
+
+//import { cordIcon } from './icon-svg.js';
+
+export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
+  {
+    homepage: 'https://cord.network/',
+    info: 'Weavenet',
+    providers: {
+      Protean: 'wss://weave1.testnet.cord.network/'
+    },
+    text: 'X One - Protean',
+    ui: {
+      color: '#40172F',
+      identityIcon: 'polkadot',
+//      logo: cordIcon
+    }
+  }
+];
