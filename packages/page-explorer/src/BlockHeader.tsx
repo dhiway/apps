@@ -3,18 +3,23 @@
 
 import type { AugmentedBlockHeader } from '@polkadot/react-hooks/ctx/types';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddressSmall, styled } from '@polkadot/react-components';
+import { AddressSmall, Icon, styled } from '@polkadot/react-components';
 import { formatNumber } from '@polkadot/util';
 
 interface Props {
-  headers: AugmentedBlockHeader[];
+  value: HeaderExtended;
+  bestNumberFinalized?: BlockNumber;
 }
 
-function formatValue (value: number, type = 's', withDecimal = false): React.ReactNode {
-  const [pre, post] = value.toFixed().split('.');
+function BlockHeader ({ bestNumberFinalized, value }: Props): React.ReactElement<Props> | null {
+  const isFinalized = useMemo(() => {
+    return bestNumberFinalized && bestNumberFinalized.toNumber() >= value.number.toNumber();
+  },
+  [bestNumberFinalized, value]
+  );
 
   return withDecimal && post?.trim()?.length > 0
     ? <>{pre}.{post} <span className='timeUnit'>{type} ago</span></>
@@ -59,6 +64,14 @@ function BlockHeader ({ headers }: Props): React.ReactElement<Props> | null {
             >
               {getDisplayValue((Date.now() - value.timestamp.toNumber()) / 1000)}
             </td>
+      <td className='finalizedIcon'>
+        {isFinalized
+          ? <Icon
+            className='highlight--finalized--color'
+            icon='circle-check'
+          />
+          : null}
+      </td>
           </StyledTr>
         );
       })}

@@ -4,14 +4,15 @@
 import type { HeaderExtended } from '@polkadot/api-derive/types';
 import type { KeyedEvent } from '@polkadot/react-hooks/ctx/types';
 import type { V2Weight } from '@polkadot/react-hooks/useWeight';
-import type { EventRecord, Hash, RuntimeVersionPartial, SignedBlock } from '@polkadot/types/interfaces';
+import type { BlockNumber, EventRecord, Hash, RuntimeVersionPartial, SignedBlock } from '@polkadot/types/interfaces';
 import type { FrameSupportDispatchPerDispatchClassWeight } from '@polkadot/types/lookup';
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddressSmall, Columar, CopyButton, LinkExternal, MarkError, styled, Table } from '@polkadot/react-components';
-import { useApi, useIsMountedRef } from '@polkadot/react-hooks';
+import { AddressSmall, Columar, CopyButton, Icon, LinkExternal, MarkError, styled, Table } from '@polkadot/react-components';
+import { useApi, useCall, useIsMountedRef } from '@polkadot/react-hooks';
+
 import { convertWeight } from '@polkadot/react-hooks/useWeight';
 import { formatNumber, isBn } from '@polkadot/util';
 
@@ -37,7 +38,7 @@ interface State {
   runtimeVersion?: RuntimeVersionPartial;
 }
 
-const EMPTY_HEADER: [React.ReactNode?, string?, number?][] = [['...', 'start', 6]];
+const EMPTY_HEADER: [React.ReactNode?, string?, number?][] = [['...', 'start', 7]];
 
 function transformResult ([[runtimeVersion, events, blockWeight], getBlock, getHeader]: [[RuntimeVersionPartial, EventRecord[] | null, FrameSupportDispatchPerDispatchClassWeight|null], SignedBlock, HeaderExtended?]): State {
   return {
@@ -60,6 +61,7 @@ function BlockByHash ({ className = '', error, value }: Props): React.ReactEleme
   const [{ blockWeight, events, getBlock, getHeader, nextBlockHash, runtimeVersion }, setState] = useState<State>({});
   const [blkError, setBlkError] = useState<Error | null | undefined>(error);
   const [evtError, setEvtError] = useState<Error | null | undefined>();
+  const bestNumberFinalized = useCall<BlockNumber>(api.derive.chain.bestNumberFinalized);
 
   const [isVersionCurrent, maxBlockWeight] = useMemo(
     () => [
@@ -161,16 +163,26 @@ function BlockByHash ({ className = '', error, value }: Props): React.ReactEleme
         [t('next'), 'start'],
         [t('extrinsics'), 'start media--1300'],
         [t('state'), 'start media--1200'],
-        [runtimeVersion ? `${runtimeVersion.specName.toString()}/${runtimeVersion.specVersion.toString()}` : undefined, 'media--1000']
+	[' ', 'spacer'],
+        [t('spec'), 'start media--1100'],
+        [t('status'), 'start media--1000']
       ]
       : EMPTY_HEADER,
-    [getHeader, runtimeVersion, t]
+    [getHeader, t]
   );
 
   const blockNumber = getHeader?.number.unwrap();
   const parentHash = getHeader?.parentHash.toHex();
   const hasParent = !getHeader?.parentHash.isEmpty;
-
+  const isFinalized = useMemo(() => {
+    if (bestNumberFinalized && blockNumber) {
+      return bestNumberFinalized.toNumber() >= blockNumber.toNumber();
+    }
+    return undefined;
+  },
+  [bestNumberFinalized, blockNumber]
+  );
+  
   return (
     <div className={className}>
       <Summary
@@ -184,7 +196,7 @@ function BlockByHash ({ className = '', error, value }: Props): React.ReactEleme
         {blkError
           ? (
             <tr>
-              <td colSpan={6}>
+              <td colSpan={8}>
                 <MarkError content={t('Unable to retrieve the specified block details. {{error}}', { replace: { error: blkError.message } }) } />
               </td>
             </tr>
@@ -219,13 +231,18 @@ function BlockByHash ({ className = '', error, value }: Props): React.ReactEleme
               }</td>
               <td className='hash overflow media--1300'>{getHeader.extrinsicsRoot.toHex()}</td>
               <td className='hash overflow media--1200'>{getHeader.stateRoot.toHex()}</td>
-              <td className='media--1000'>
-                {value && (
-                  <LinkExternal
-                    data={value}
-                    type='block'
-                  />
-                )}
+              <td
+                className='spacer overflow'
+                style={{ width: '10px' }}
+              ></td>
+              <td className='hash overflow media--1100'>{[runtimeVersion ? `${runtimeVersion.specName.toString()}/${runtimeVersion.specVersion.toString()}` : undefined]}</td>
+              <td className='finalizedIcon overflow media--1000'>
+                {isFinalized
+                  ? <Icon
+                    className='highlight--finalized--color'
+                    icon='circle-check'
+                    />
+                  : null}
               </td>
             </tr>
           )
