@@ -43,6 +43,7 @@ function signerIconName (status: QueueTxStatus): IconName {
     case 'completed':
     case 'inblock':
     case 'finalized':
+      return 'circle-check';
     case 'sent':
       return 'check';
 

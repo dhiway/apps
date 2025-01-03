@@ -3,20 +3,23 @@
 
 import type { HeaderExtended } from '@polkadot/api-derive/types';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AddressSmall } from '@polkadot/react-components';
+import { AddressSmall, Icon } from '@polkadot/react-components';
 import { formatNumber } from '@polkadot/util';
 
 interface Props {
   value: HeaderExtended;
+  bestNumberFinalized?: BlockNumber;
 }
 
-function BlockHeader ({ value }: Props): React.ReactElement<Props> | null {
-  if (!value) {
-    return null;
-  }
+function BlockHeader ({ bestNumberFinalized, value }: Props): React.ReactElement<Props> | null {
+  const isFinalized = useMemo(() => {
+    return bestNumberFinalized && bestNumberFinalized.toNumber() >= value.number.toNumber();
+  },
+  [bestNumberFinalized, value]
+  );
 
   const hashHex = value.hash.toHex();
 
@@ -32,6 +35,14 @@ function BlockHeader ({ value }: Props): React.ReactElement<Props> | null {
         {value.author && (
           <AddressSmall value={value.author} />
         )}
+      </td>
+      <td className='finalizedIcon'>
+        {isFinalized
+          ? <Icon
+            className='highlight--finalized--color'
+            icon='circle-check'
+          />
+          : null}
       </td>
     </tr>
   );

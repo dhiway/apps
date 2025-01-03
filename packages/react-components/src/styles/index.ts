@@ -137,6 +137,10 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: ${getHighlight(uiHighlight)} !important;
   }
 
+  .highlight--finalized--color {
+    color: ${defaultHighlight} !important;
+  }
+
   .highlight--color-contrast {
     color: ${getContrast(uiHighlight)};
   }
