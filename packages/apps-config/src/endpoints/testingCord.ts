@@ -4,7 +4,7 @@
 
 import type { EndpointOption } from './types.js';
 
-//import { cordIcon } from './icon-svg.js';
+import { cordIcon } from './icon-svg.js';
 
 export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
   {
@@ -16,7 +16,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     text: 'Sparknet (staging)',
     ui: {
       color: '#40172F',
-//      logo: cordIcon
+      logo: cordIcon
     }
   }
 ];

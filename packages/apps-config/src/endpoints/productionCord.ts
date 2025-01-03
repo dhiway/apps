@@ -3,7 +3,7 @@
 
 import type { EndpointOption } from './types.js';
 
-//import { cordIcon } from './icon-svg.js';
+import { cordIcon } from './icon-svg.js';
 
 export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
@@ -12,11 +12,11 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       Protean: 'wss://weave1.testnet.cord.network/'
     },
-    text: 'X One - Protean',
+    text: 'Weavenet',
     ui: {
       color: '#40172F',
       identityIcon: 'polkadot',
-//      logo: cordIcon
+      logo: cordIcon
     }
   }
 ];
