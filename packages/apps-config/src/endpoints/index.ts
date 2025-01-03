@@ -26,6 +26,15 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
     {
       isDisabled: false,
       isHeader: true,
+      text: t('rpc.header.live', 'Test Networks', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, stagingChains, firstOnly, withSort),
+    {
+      isDisabled: false,
+      isHeader: true,
       isSpaced: true,
       text: t('rpc.header.live', 'Live Networks', { ns: 'apps-config' }),
       textBy: '',
@@ -33,15 +42,6 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       value: ''
     },
     ...expandEndpoints(t, prodChains, firstOnly, withSort),
-    {
-      isDisabled: false,
-      isHeader: true,
-      text: t('rpc.header.live', 'Test Networks', { ns: 'apps-config' }),
-      textBy: '',
-      ui: {},
-      value: ''
-    },
-    ...expandEndpoints(t, stagingChains, firstOnly, withSort),
     ...createDev(t),
     ...createOwn(t)
   ].filter(({ isDisabled }) => !isDisabled);

@@ -6,6 +6,7 @@ import type { EndpointOption } from './types.js';
 import { cordIcon } from './icon-svg.js';
 
 export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
+/*
   {
     homepage: 'https://cord.network/',
     info: 'Royal Blue',
@@ -19,6 +20,7 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
       logo: cordIcon
     }
   },
+*/  
   {
     homepage: 'https://cord.network/',
     info: 'X One - Protean',
