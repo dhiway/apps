@@ -4,7 +4,7 @@
 
 import type { EndpointOption } from './types.js';
 
-//import { cordIcon } from './icon-svg.js';
+import { cordIcon } from './icon-svg.js';
 
 export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
 /* {
@@ -28,7 +28,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     text: 'Sparknet (staging)',
     ui: {
       color: '#40172F',
-//      logo: cordIcon
+      logo: cordIcon
     }
   },
 /*
@@ -41,7 +41,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     text: 'Confidex Alpha (staging)',
     ui: {
       color: '#5097fF',
-//      logo: cordIcon
+      logo: cordIcon
     }
   },
 */
@@ -54,7 +54,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     text: 'Finternet Alpha (staging)',
     ui: {
       color: '#20070F',
-//      logo: cordIcon
+      logo: cordIcon
     }
   },
   {
@@ -66,7 +66,7 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
     text: 'Permissionless (testnet)',
     ui: {
       color: '#40070F',
-//      logo: cordIcon
+      logo: cordIcon
     }
   }
 ];
