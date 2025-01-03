@@ -3,7 +3,7 @@
 
 import type { EndpointOption } from './types.js';
 
-//import { cordIcon } from './icon-svg.js';
+import { cordIcon } from './icon-svg.js';
 
 export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
@@ -16,7 +16,7 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     ui: {
       color: '#40172F',
       identityIcon: 'polkadot',
-//      logo: cordIcon
+      logo: cordIcon
     }
   },
   {
@@ -29,7 +29,7 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     ui: {
       color: '#40172F',
       identityIcon: 'polkadot',
-//      logo: cordIcon
+      logo: cordIcon
     }
   }
 ];
