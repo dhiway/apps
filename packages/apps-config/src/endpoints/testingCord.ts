@@ -59,9 +59,21 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
   },
   {
     homepage: 'https://cord.network/',
-    info: 'CORD Permissionless Testnet',
+    info: 'CORD Permissionless Testnet (old)',
     providers: {
       Finternet: 'wss://registries.demo.cord.network/'
+    },
+    text: 'Permissionless (testnet)',
+    ui: {
+      color: '#40070F',
+      logo: cordIcon
+    }
+  },
+  {
+    homepage: 'https://cord.network/',
+    info: 'CORD Permissionless Testnet',
+    providers: {
+      Finternet: 'wss://weave1.demo.cord.network/'
     },
     text: 'Permissionless (testnet)',
     ui: {
