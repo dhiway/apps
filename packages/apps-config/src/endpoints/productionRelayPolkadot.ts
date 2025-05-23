@@ -804,7 +804,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     info: 'subsocial',
     paraId: 2101,
     providers: {
-      Dappforce: 'wss://para.subsocial.network'
+      // Dappforce: 'wss://para.subsocial.network' // https://github.com/polkadot-js/apps/issues/11569
       // Dwellir: 'wss://subsocial-rpc.dwellir.com' // https://github.com/polkadot-js/apps/issues/11513
       // OnFinality: 'wss://subsocial-polkadot.api.onfinality.io/public-ws' // https://github.com/polkadot-js/apps/issues/9977
     },
@@ -895,7 +895,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     info: 'zeitgeist',
     paraId: 2092,
     providers: {
-      // OnFinality: 'wss://zeitgeist.api.onfinality.io/public-ws' // https://github.com/polkadot-js/apps/issues/11513
+      OnFinality: 'wss://zeitgeist.api.onfinality.io/public-ws'
       // ZeitgeistPM: 'wss://main.rpc.zeitgeist.pm/ws' // https://github.com/polkadot-js/apps/issues/11215
     },
     text: 'Zeitgeist',
