@@ -10,16 +10,12 @@ import { AddressSmall, Icon, styled } from '@polkadot/react-components';
 import { formatNumber } from '@polkadot/util';
 
 interface Props {
-  value: HeaderExtended;
+  headers: AugmentedBlockHeader[];
   bestNumberFinalized?: BlockNumber;
 }
 
-function BlockHeader ({ bestNumberFinalized, value }: Props): React.ReactElement<Props> | null {
-  const isFinalized = useMemo(() => {
-    return bestNumberFinalized && bestNumberFinalized.toNumber() >= value.number.toNumber();
-  },
-  [bestNumberFinalized, value]
-  );
+function formatValue (value: number, type = 's', withDecimal = false): React.ReactNode {
+  const [pre, post] = value.toFixed().split('.');
 
   return withDecimal && post?.trim()?.length > 0
     ? <>{pre}.{post} <span className='timeUnit'>{type} ago</span></>
@@ -34,11 +30,16 @@ function getDisplayValue (elapsed: number): React.ReactNode {
       : formatValue(elapsed / 3600, 'hrs');
 }
 
-function BlockHeader ({ headers }: Props): React.ReactElement<Props> | null {
+function BlockHeader ({ headers, bestNumberFinalized }: Props): React.ReactElement<Props> | null {
   return (
     <>
       {headers.map((value, index) => {
         const hashHex = value.hash.toHex();
+        const isFinalized = useMemo(() => {
+	  return bestNumberFinalized && bestNumberFinalized.toNumber() >= value.number.toNumber();
+        },
+        [bestNumberFinalized, value]
+        );
 
         return (
           <StyledTr

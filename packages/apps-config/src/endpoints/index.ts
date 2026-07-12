@@ -22,12 +22,7 @@ function defaultT (keyOrText: string, text?: string | TOptions, options?: TOptio
 export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, withSort = true): LinkOption[] {
   // Collect all endpoint configs to pass to createCustom for UI lookup
   const allEndpoints = [
-    prodRelayPolkadot,
-    prodRelayKusama,
-    testRelayWestend,
-    testRelayPaseo,
     ...prodChains,
-    ...testChains
   ];
 
   return [
@@ -44,15 +39,6 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
     {
       isDisabled: false,
       isHeader: true,
-      text: t('rpc.header.live', 'Test Networks', { ns: 'apps-config' }),
-      textBy: '',
-      ui: {},
-      value: ''
-    },
-    ...expandEndpoints(t, stagingChains, firstOnly, withSort),
-    {
-      isDisabled: false,
-      isHeader: true,
       isSpaced: true,
       text: t('rpc.header.live', 'Live Networks', { ns: 'apps-config' }),
       textBy: '',
@@ -60,7 +46,6 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       value: ''
     },
     ...expandEndpoints(t, prodChains, firstOnly, withSort),
-    ...expandEndpoints(t, stagingChains, firstOnly, withSort),
     {
       isDevelopment: true,
       isDisabled: false,

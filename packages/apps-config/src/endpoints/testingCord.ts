@@ -7,7 +7,7 @@ import type { EndpointOption } from './types.js';
 import { cordIcon } from './icon-svg.js';
 
 export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
-  {
+/*  {
     homepage: 'https://cord.network/',
     info: 'Sparknet',
     providers: {
@@ -18,5 +18,5 @@ export const stagingChains: Omit<EndpointOption, 'teleport'>[] = [
       color: '#40172F',
       logo: cordIcon
     }
-  }
+  }*/
 ];

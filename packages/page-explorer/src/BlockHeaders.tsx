@@ -50,9 +50,9 @@ function BlockHeaders ({ headers }: Props): React.ReactElement<Props> {
         .map(([timestamp, headers]): React.ReactNode => {
           return (
             <BlockHeader
+	      bestNumberFinalized={bestNumberFinalized}
               headers={headers.filter((e) => !!e)}
               key={timestamp}
-              value={header}
             />
           );
         })}

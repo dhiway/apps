@@ -6,12 +6,11 @@ import type { EndpointOption } from './types.js';
 import { cordIcon } from './icon-svg.js';
 
 export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
-/*
   {
     homepage: 'https://cord.network/',
     info: 'Weavenet',
     providers: {
-      Protean: 'wss://weave1.testnet.cord.network/'
+      Dhiway: 'wss://weave1.testnet.cord.network/'
     },
     text: 'Weavenet',
     ui: {
